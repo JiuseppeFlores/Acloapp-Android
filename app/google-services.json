@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "682668532470",
+    "project_id": "acloapp-83d16",
+    "storage_bucket": "acloapp-83d16.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:682668532470:android:61f818531d527cc2aa82d7",
+        "android_client_info": {
+          "package_name": "com.stisbolivia.acloapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "682668532470-jb645015k1t67apdmjuf82rshgev9u56.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAU8FhO4srzoGyn499fRuY77V3MHspqU4I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "682668532470-jb645015k1t67apdmjuf82rshgev9u56.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

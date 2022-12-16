@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MenuPrincipal">
+
+    <WebView
+        android:id="@+id/webview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></WebView>
+
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:id="@+id/functions_fab"
+        tools:ignore="MissingConstraints"
+        app:icon="@drawable/ic_options"
+        app:iconTint="@color/white"
+        android:backgroundTint="@color/teal_700"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:text="Funciones"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+    <!--<com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/camera_fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:backgroundTint="@color/ic_camera"
+        android:tintMode="@color/white"
+        app:fabSize="normal"
+        app:layout_constraintBottom_toTopOf="@+id/functions_fab"
+        app:layout_constraintEnd_toEndOf="@+id/functions_fab"
+        app:srcCompat="@drawable/ic_camera"/>
+    <TextView
+        android:id="@+id/text_camera_fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:text="Tomar Foto"
+        app:layout_constraintBottom_toBottomOf="@+id/camera_fab"
+        app:layout_constraintEnd_toStartOf="@+id/camera_fab"
+        app:layout_constraintTop_toTopOf="@+id/camera_fab" />-->
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/calendar_fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:backgroundTint="@color/ic_calendar"
+        android:tintMode="@color/white"
+        app:fabSize="normal"
+        app:layout_constraintBottom_toTopOf="@+id/functions_fab"
+        app:layout_constraintEnd_toEndOf="@+id/functions_fab"
+        app:srcCompat="@drawable/ic_calendar"/>
+    <TextView
+        android:id="@+id/text_calendar_fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:text="Lista de Actividades"
+        app:layout_constraintBottom_toBottomOf="@+id/calendar_fab"
+        app:layout_constraintEnd_toStartOf="@+id/calendar_fab"
+        app:layout_constraintTop_toTopOf="@+id/calendar_fab" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

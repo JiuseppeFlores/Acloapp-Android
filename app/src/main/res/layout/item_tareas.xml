@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:ignore="MissingConstraints"
+        app:cardCornerRadius="10dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <ImageView
+                android:layout_height="50dp"
+                android:layout_width="50dp"
+                android:layout_margin="10dp"
+                android:src="@drawable/ic_activities"
+                app:tint="@color/success"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/txt_nombre"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:text="TITULO DE LA NOTIFICACION"
+                    android:textStyle="bold"
+                    android:layout_margin="5dp"
+                    />
+                <TextView
+                    android:id="@+id/txt_descripcion"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:text="Descripcion de la notificacion"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginBottom="5dp"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginBottom="5dp"
+                    >
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/ic_time"
+                        android:layout_marginEnd="4dp"
+                        app:tint="@color/black" />
+                    <TextView
+                        android:id="@+id/txt_hora"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="15:20:00"
+                        android:textStyle="italic|bold"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginBottom="5dp"
+                    >
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/ic_calendar"
+                        android:layout_marginEnd="4dp"
+                        app:tint="@color/black" />
+                    <TextView
+                        android:id="@+id/txt_fecha"
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:text="02-12-2022"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginBottom="5dp"
+                        android:textStyle="italic|bold"/>
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+</LinearLayout>
