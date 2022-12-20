@@ -14,13 +14,19 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.provider.CalendarContract;
 import android.util.Log;
 import android.view.View;
+import android.webkit.GeolocationPermissions;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -52,6 +58,8 @@ public class MenuPrincipal extends AppCompatActivity {
     FloatingActionButton /*fabCamera, */fabCalendar;
     ExtendedFloatingActionButton efabFunctions;
     TextView /*txtFabCamera,*/txtFabCalendar;
+    RelativeLayout rlLoading;
+    ProgressBar pbLoading;
 
     Boolean isAllFabVisible;
 
@@ -64,6 +72,10 @@ public class MenuPrincipal extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.menu_principal);
         getSupportActionBar().hide();
+
+        rlLoading = findViewById(R.id.loading);
+        pbLoading = findViewById(R.id.pb_loading);
+        pbLoading.setProgress(0);
 
         efabFunctions = findViewById(R.id.functions_fab);
         //fabCamera = findViewById(R.id.camera_fab);
@@ -128,6 +140,23 @@ public class MenuPrincipal extends AppCompatActivity {
                     request.grant(request.getResources());
                 }
             }
+
+            @Override
+            public void onGeolocationPermissionsShowPrompt(String origin, GeolocationPermissions.Callback callback) {
+                super.onGeolocationPermissionsShowPrompt(origin, callback);
+                callback.invoke(origin, true, false);
+            }
+
+            @Override
+            public void onProgressChanged(WebView view, int newProgress) {
+                super.onProgressChanged(view, newProgress);
+                pbLoading.setProgress(newProgress);
+                if(newProgress == 100){
+                    pbLoading.setProgress(0);
+                    pbLoading.setVisibility(View.INVISIBLE);
+                    mWebView.setVisibility(View.VISIBLE);
+                }
+            }
         });
 
         mWebView.setWebViewClient(new WebViewClient() {
@@ -143,7 +172,6 @@ public class MenuPrincipal extends AppCompatActivity {
 
         //MANEJO DEL CALENDARIO
         sincronizarActividades();
-        //setAlarm("PRUEBA ACLOAPP","2022-12-16","03:30 PM");
 
     }
 
@@ -232,7 +260,7 @@ public class MenuPrincipal extends AppCompatActivity {
             cv.put(CalendarContract.Events.DESCRIPTION,tarea.getDescripcion());
             cv.put(CalendarContract.Events.EVENT_LOCATION,"");
             cv.put(CalendarContract.Events.DTSTART,calendar.getTimeInMillis());
-            cv.put(CalendarContract.Events.DTEND,calendar.getTimeInMillis()+60*60*1000*6);
+            cv.put(CalendarContract.Events.DTEND,calendar.getTimeInMillis()+60*60*1000*3);
             cv.put(CalendarContract.Events.HAS_ALARM, true);
             cv.put(CalendarContract.Events.CALENDAR_ID,1);
             cv.put(CalendarContract.Events.EVENT_TIMEZONE,Calendar.getInstance().getTimeZone().getID());
@@ -243,8 +271,8 @@ public class MenuPrincipal extends AppCompatActivity {
 
             ContentValues reminder = new ContentValues();
             reminder.put(CalendarContract.Reminders.EVENT_ID, eventId);
-            reminder.put(CalendarContract.Reminders.MINUTES, 1);
-            reminder.put(CalendarContract.Reminders.METHOD, 1);
+            reminder.put(CalendarContract.Reminders.MINUTES, 10);
+            reminder.put(CalendarContract.Reminders.METHOD, CalendarContract.Reminders.METHOD_DEFAULT);
             getContentResolver().insert(CalendarContract.Reminders.CONTENT_URI, reminder);*/
 
             DBTareas dbTareas = new DBTareas(this);
@@ -255,7 +283,7 @@ public class MenuPrincipal extends AppCompatActivity {
 
         }catch(Exception e){
             e.printStackTrace();
-            Log.d("CALENDARIO","Error: "+e.getMessage().toString());
+            //Log.d("CALENDARIO","Error: "+e.getMessage().toString());
         }
 
         /*RECORDATORIOS*/
@@ -267,7 +295,6 @@ public class MenuPrincipal extends AppCompatActivity {
         reminder.put(CalendarContract.Reminders.MINUTES, 1);
         reminder.put(CalendarContract.Reminders.METHOD, CalendarContract.Reminders.METHOD_ALERT);
         getContentResolver().insert(CalendarContract.Reminders.CONTENT_URI, reminder);*/
-
 
     }
 
@@ -291,26 +318,4 @@ public class MenuPrincipal extends AppCompatActivity {
             super.onBackPressed();
     }
 
-    /*private void setAlarm(String text, String date, String time) {
-        AlarmManager am = (AlarmManager) getSystemService(this.ALARM_SERVICE);                   //assigining alaram manager object to set alaram
-
-        Intent intent = new Intent(getApplicationContext(), AlarmBrodcast.class);
-        intent.putExtra("event", text);                                                       //sending data to alarm class to create channel and notification
-        intent.putExtra("time", date);
-        intent.putExtra("date", time);
-
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 0, intent, PendingIntent.FLAG_ONE_SHOT);
-        String dateandtime = date + " " + time;
-        DateFormat formatter = new SimpleDateFormat("d-M-yyyy hh:mm");
-        try {
-            Date date1 = formatter.parse(dateandtime);
-            am.set(AlarmManager.RTC_WAKEUP, date1.getTime(), pendingIntent);
-            Toast.makeText(getApplicationContext(), "Alaram", Toast.LENGTH_SHORT).show();
-
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-                                                             //navigates from adding reminder activity ot mainactivity
-        getIntent().setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-    }*/
 }
